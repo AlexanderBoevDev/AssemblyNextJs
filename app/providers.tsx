@@ -1,24 +1,28 @@
 "use client";
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { SessionProvider } from "next-auth/react";
 import { HeroUIProvider } from "@heroui/react";
 import { ThemeProvider as NextThemesProvider } from "next-themes";
 
-type Props = {
-  children: React.ReactNode;
-};
+export function Providers({ children }: { children: React.ReactNode }) {
+  const [mounted, setMounted] = useState(false);
 
-/**
- * Общий провайдер, который:
- * 1) Даёт контекст сессий (NextAuth).
- * 2) Включает библиотеку next-themes (переключение тем).
- * 3) HeroUIProvider (компоненты NextUI).
- */
-export function Providers({ children }: Props) {
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) {
+    return null;
+  }
+
   return (
     <SessionProvider>
-      <NextThemesProvider attribute="class" defaultTheme="dark">
+      <NextThemesProvider
+        attribute="class"
+        defaultTheme="light"
+        enableSystem={false}
+      >
         <HeroUIProvider>{children}</HeroUIProvider>
       </NextThemesProvider>
     </SessionProvider>
