@@ -7,10 +7,9 @@ const prisma = new PrismaClient();
 
 export const authOptions: NextAuthOptions = {
   session: {
-    strategy: "jwt" // Важно для middleware, т.к. будем проверять JWT
+    strategy: "jwt"
   },
   secret: process.env.NEXTAUTH_SECRET,
-
   providers: [
     CredentialsProvider({
       name: "Credentials",
@@ -38,30 +37,29 @@ export const authOptions: NextAuthOptions = {
           throw new Error("Неверный пароль");
         }
 
+        // Возвращаем объект со всеми нужными полями (включая role)
         return {
-          // приведение к строке, чтобы избежать конфликтов типов
           id: String(user.id),
-          email: user.email
+          email: user.email,
+          role: user.role
         };
       }
     })
   ],
-
-  // Колбэки, чтобы сохранить данные в токене и сессии
   callbacks: {
     async jwt({ token, user }) {
       if (user) {
         token.id = user.id;
         token.email = user.email;
-        // тут можно добавить role, name и т.п., если нужно
+        token.role = user.role;
       }
       return token;
     },
     async session({ session, token }) {
       if (token) {
-        // расширьте типы через next-auth.d.ts, чтобы session.user.id не ругался
         session.user.id = token.id as string;
         session.user.email = token.email as string;
+        session.user.role = token.role as string;
       }
       return session;
     }

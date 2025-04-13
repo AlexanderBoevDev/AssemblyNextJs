@@ -1,14 +1,18 @@
 import { Inter } from "next/font/google";
 import { Providers } from "@/app/providers";
-import NavBar from "@/app/components/NavBar";
+import NavBar from "@/components/NavBar";
+import { FooterPage } from "@/components/PageFooter";
 import "@/styles/globals.css";
-import { FooterPage } from "@/app/components/PageFooter";
+import "@/public/assets/fonts/magistral.css";
+import Script from "next/script";
+
+const RECAPTCHA_SITE_KEY = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || "";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-  title: "I'm Todo",
-  description: "Менеджер задач"
+  title: "ASB Studio",
+  description: "Диджитал агенство ASB Studio"
 };
 
 export default function RootLayout({
@@ -18,16 +22,27 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`h-full flex flex-col ${inter.className}`}>
+      <body
+        className={`
+          min-h-screen
+          h-full
+          flex
+          flex-col
+          bg-white dark:bg-dark-base
+          text-dark-base dark:text-white
+          ${inter.className}
+        `}
+      >
         <Providers>
-          <div className="dark:text-gray-100 dark:bg-black">
-            <NavBar />
-            <main className="container flex-grow mx-auto mt-5 mb-5 min-h-screen">
-              {children}
-            </main>
-            <FooterPage />
-          </div>
+          <NavBar />
+          <main className="overflow-hidden">{children}</main>
+          <FooterPage />
         </Providers>
+        <Script
+          src={`https://www.google.com/recaptcha/api.js?render=${RECAPTCHA_SITE_KEY}`}
+          async
+          defer
+        />
       </body>
     </html>
   );

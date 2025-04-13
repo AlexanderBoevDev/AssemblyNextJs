@@ -1,0 +1,74 @@
+@font-face {
+  font-family: "Magistral";
+  src: url("./Magistral/Magistral.eot");
+  src:
+    url("./Magistral/Magistral.eot?#iefix") format("embedded-opentype"),
+    url("./Magistral/Magistral.otf") format("opentype"),
+    url("./Magistral/Magistral.svg") format("svg"),
+    url("./Magistral/Magistral.ttf") format("truetype"),
+    url("./Magistral/Magistral.woff") format("woff"),
+    url("./Magistral/Magistral.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "MagistralLightItalic";
+  src: url("./MagistralLightItalic/MagistralLightItalic.eot");
+  src:
+    url("./MagistralLightItalic/MagistralLightItalic.eot?#iefix")
+      format("embedded-opentype"),
+    url("./MagistralLightItalic/MagistralLightItalic.otf") format("opentype"),
+    url("./MagistralLightItalic/MagistralLightItalic.svg") format("svg"),
+    url("./MagistralLightItalic/MagistralLightItalic.ttf") format("truetype"),
+    url("./MagistralLightItalic/MagistralLightItalic.woff") format("woff"),
+    url("./MagistralLightItalic/MagistralLightItalic.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "MagistralBold";
+  src: url("./MagistralBold/MagistralBold.eot");
+  src:
+    url("./MagistralBold/MagistralBold.eot?#iefix") format("embedded-opentype"),
+    url("./MagistralBold/MagistralBold.otf") format("opentype"),
+    url("./MagistralBold/MagistralBold.svg") format("svg"),
+    url("./MagistralBold/MagistralBold.ttf") format("truetype"),
+    url("./MagistralBold/MagistralBold.woff") format("woff"),
+    url("./MagistralBold/MagistralBold.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "MagistralBlack";
+  src: url("./MagistralBlack/MagistralBlack.eot");
+  src:
+    url("./MagistralBlack/MagistralBlack.eot?#iefix")
+      format("embedded-opentype"),
+    url("./MagistralBlack/MagistralBlack.otf") format("opentype"),
+    url("./MagistralBlack/MagistralBlack.svg") format("svg"),
+    url("./MagistralBlack/MagistralBlack.ttf") format("truetype"),
+    url("./MagistralBlack/MagistralBlack.woff") format("woff"),
+    url("./MagistralBlack/MagistralBlack.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+}
+
+.font-magistral {
+  font-family: "Magistral", sans-serif;
+}
+
+.font-magistral-light-italic {
+  font-family: "MagistralLightItalic", sans-serif;
+}
+
+.font-magistral-bold {
+  font-family: "MagistralBold", sans-serif;
+}
+
+.font-magistral-black {
+  font-family: "MagistralBlack", sans-serif;
+}
+
+.font-magistral {
+  font-family: "Magistral", sans-serif;
+}

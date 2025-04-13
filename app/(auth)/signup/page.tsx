@@ -8,7 +8,7 @@ import { Eye, EyeOff } from "lucide-react";
 import Link from "next/link";
 
 export default function SignupPage() {
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
   const router = useRouter();
 
   const [email, setEmail] = useState("");
@@ -18,10 +18,17 @@ export default function SignupPage() {
   const toggleVisibility = () => setIsVisible((prev) => !prev);
 
   useEffect(() => {
-    if (session?.user) {
-      router.push("/user");
+    if (status === "loading") return;
+
+    if (!session) {
+      router.replace("/login");
+      return;
     }
-  }, [session, router]);
+
+    if (session.user.role !== "ADMIN") {
+      router.replace("/");
+    }
+  }, [status, session, router]);
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -43,15 +50,16 @@ export default function SignupPage() {
     }
   };
 
+  if (status === "loading") {
+    return <p className="text-center mt-10">Загрузка...</p>;
+  }
+
+  if (!session || session.user.role !== "ADMIN") {
+    return null;
+  }
+
   return (
-    <div
-      className="
-        min-h-screen
-        text-gray-900
-        dark:text-gray-100
-        flex flex-col mt-10
-      "
-    >
+    <div className="min-h-screen text-gray-900 dark:text-gray-100 flex flex-col mt-10">
       <div className="flex flex-col items-center px-6 py-12 sm:mx-auto sm:w-full sm:max-w-lg">
         <h2 className="text-center text-2xl font-bold tracking-tight sm:text-2xl/9">
           Создать учётную запись
@@ -98,16 +106,7 @@ export default function SignupPage() {
             type="submit"
             color="primary"
             radius="sm"
-            className="
-              w-full
-              bg-blue-600
-              hover:bg-blue-700
-              text-white
-              font-semibold
-              text-sm
-              shadow-sm
-              h-14
-            "
+            className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold text-sm shadow-sm h-14"
           >
             Зарегистрироваться
           </Button>
@@ -116,11 +115,7 @@ export default function SignupPage() {
           Уже есть учётная запись?{" "}
           <Link
             href="/login"
-            className="
-              font-semibold text-blue-600
-              hover:text-blue-500
-              dark:text-blue-400
-            "
+            className="font-semibold text-blue-600 hover:text-blue-500 dark:text-blue-400"
           >
             Войти
           </Link>
